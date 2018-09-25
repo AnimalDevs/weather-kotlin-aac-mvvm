@@ -1,8 +1,5 @@
 package es.animaldevs.app.navigator
 
-/**
- * Created by vanadisdevmicro on 7/8/18.
- */
 import android.app.Activity
 import android.content.Intent
 import es.animaldevs.app.ui.weather.WeatherListActivity
