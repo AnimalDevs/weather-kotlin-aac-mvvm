@@ -13,9 +13,9 @@ import javax.inject.Singleton
 interface ViewModelInjector {
     /**
      * Injects required dependencies into the specified WeatherListViewModel.
-     * @param vanadisListViewModel WeatherListViewModel in which to inject the dependencies
+     * @param weatherListViewModel WeatherListViewModel in which to inject the dependencies
      */
-    fun inject(vanadisListViewModel: WeatherListViewModel)
+    fun inject(weatherListViewModel: WeatherListViewModel)
 
     @Component.Builder
     interface Builder {
