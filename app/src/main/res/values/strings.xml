@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ClueHouse</string>
+
+    <string name="retry">Retry</string>
+    <string name="item_error">An error occurred while loading the clues</string>
+    <string name="scan_now">Busca QR</string>
+    <string name="puntos_conseguidos">Puntos\nConseguidos</string>
+    <string name="puntos_totales">Puntos\nTotales</string>
+    <string name="game_started">El juego ya está comenzado. Busca otro QR.</string>
+    <string name="clue_used">La pista ya fue recogida. Busca otro QR.</string>
+    <string name="reiniciar">Reiniciar</string>
+    <string name="alert_reset">¿Estás seguro que deseas empezar de nuevo?</string>
+</resources>
