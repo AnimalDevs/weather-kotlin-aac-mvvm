@@ -1,6 +1,6 @@
 package es.animaldevs.app.ui.weather
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import es.animaldevs.app.base.BaseViewModel
 import es.animaldevs.app.model.ModelExample
 

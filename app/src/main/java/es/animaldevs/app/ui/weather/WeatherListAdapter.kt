@@ -1,7 +1,7 @@
 package es.animaldevs.app.ui.weather
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import es.animaldevs.app.databinding.ItemWeatherBinding
 import es.animaldevs.app.model.ModelExample
 
 class WeatherListAdapter(private val callbacks: Callbacks? = null)
-    : RecyclerView.Adapter<WeatherListAdapter.ViewHolder>() {
+    : androidx.recyclerview.widget.RecyclerView.Adapter<WeatherListAdapter.ViewHolder>() {
     private lateinit var modelExampleList: List<ModelExample>
 
     interface Callbacks {
@@ -35,7 +35,7 @@ class WeatherListAdapter(private val callbacks: Callbacks? = null)
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(private val binding: ItemWeatherBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemWeatherBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
 
         init {
             itemView.setOnClickListener { callbacks?.onItemClick(it, modelExampleList[adapterPosition]) }

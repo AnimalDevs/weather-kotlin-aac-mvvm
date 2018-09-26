@@ -1,6 +1,6 @@
 package es.animaldevs.app.base
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import es.animaldevs.app.injection.component.ActivityInjector
 import es.animaldevs.app.injection.component.DaggerActivityInjector
 import es.animaldevs.app.injection.module.NavigatorModule

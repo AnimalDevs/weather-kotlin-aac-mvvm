@@ -1,6 +1,6 @@
 package es.animaldevs.app.base
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import es.animaldevs.app.injection.component.DaggerViewModelInjector
 import es.animaldevs.app.injection.component.ViewModelInjector
 import es.animaldevs.app.injection.module.DataModule

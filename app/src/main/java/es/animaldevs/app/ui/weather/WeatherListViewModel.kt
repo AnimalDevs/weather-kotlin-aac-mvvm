@@ -1,6 +1,6 @@
 package es.animaldevs.app.ui.weather
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import android.view.View
 import com.squareup.moshi.Moshi
 import es.animaldevs.app.R

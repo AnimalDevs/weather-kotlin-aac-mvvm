@@ -1,7 +1,7 @@
 package es.animaldevs.app.model.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import es.animaldevs.app.model.ModelExample
 import es.animaldevs.app.model.ModelExampleDao
 

@@ -1,12 +1,12 @@
 package es.animaldevs.app.ui.weather
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.LinearLayoutManager
+import androidx.annotation.StringRes
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import es.animaldevs.app.R
 import es.animaldevs.app.base.BaseActivity
 import es.animaldevs.app.databinding.ActivityWeatherListBinding
@@ -37,7 +37,10 @@ class WeatherListActivity : BaseActivity() {
         actionBar!!.title = "Weather"
         actionBar.elevation = 4.0F
 
-        binding.clueList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.clueList.layoutManager = androidx.recyclerview.widget
+                .LinearLayoutManager(this,
+                        RecyclerView.VERTICAL,
+                        false)
 
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(WeatherListViewModel::class.java)
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
