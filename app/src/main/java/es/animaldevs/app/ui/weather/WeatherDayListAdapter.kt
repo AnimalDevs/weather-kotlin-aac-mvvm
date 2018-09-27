@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import es.animaldevs.app.R
 import es.animaldevs.app.databinding.ItemWeatherBinding
-import es.animaldevs.app.model.ModelExample
+import es.animaldevs.app.model.local.weatherday.WeatherDay
 
-class WeatherListAdapter(private val callbacks: Callbacks? = null)
-    : RecyclerView.Adapter<WeatherListAdapter.ViewHolder>() {
-    private lateinit var modelExampleList: List<ModelExample>
+class WeatherDayListAdapter(private val callbacks: Callbacks? = null)
+    : RecyclerView.Adapter<WeatherDayListAdapter.ViewHolder>() {
+    private lateinit var items: List<WeatherDay>
 
     interface Callbacks {
-        fun onItemClick(view: View, item: ModelExample)
+        fun onItemClick(view: View, item: WeatherDay)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,28 +23,32 @@ class WeatherListAdapter(private val callbacks: Callbacks? = null)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(modelExampleList[position])
+        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int {
-        return if (::modelExampleList.isInitialized) modelExampleList.size else 0
+        return if (::items.isInitialized) items.size else 0
     }
 
-    fun updateWeatherList(modelExampleList: List<ModelExample>) {
-        this.modelExampleList = modelExampleList
+    fun updateWeatherList(items: List<WeatherDay>?) {
+        items?.let {
+            this.items = it
+        } ?: run {
+            this.items = arrayListOf()
+        }
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(private val binding: ItemWeatherBinding) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            itemView.setOnClickListener { callbacks?.onItemClick(it, modelExampleList[adapterPosition]) }
+            itemView.setOnClickListener { callbacks?.onItemClick(it, items[adapterPosition]) }
         }
 
-        private val viewModel = WeatherViewModel()
+        private val viewModel = WeatherDayItemViewModel()
 
-        fun bind(modelExample: ModelExample) {
-            viewModel.bind(modelExample)
+        fun bind(item: WeatherDay) {
+            viewModel.bind(item)
             binding.viewModel = viewModel
         }
     }

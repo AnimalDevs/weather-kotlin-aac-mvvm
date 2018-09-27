@@ -2,12 +2,12 @@ package es.animaldevs.app.navigator
 
 import android.app.Activity
 import android.content.Intent
-import es.animaldevs.app.ui.weather.WeatherListActivity
+import es.animaldevs.app.ui.weather.WeatherDayListActivity
 
 class Navigator {
 
     fun navigateToHome(activity: Activity) {
-        val intent = Intent(activity, WeatherListActivity::class.java)
+        val intent = Intent(activity, WeatherDayListActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         activity.startActivity(intent)
     }

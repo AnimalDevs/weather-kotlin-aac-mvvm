@@ -5,7 +5,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
-import es.animaldevs.app.network.CluesApi
+import es.animaldevs.app.network.AccuWeatherApi
 import es.animaldevs.app.utils.BASE_URL
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
@@ -39,8 +39,8 @@ object DataModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideVanadisApi(retrofit: Retrofit): CluesApi {
-        return retrofit.create(CluesApi::class.java)
+    internal fun provideVanadisApi(retrofit: Retrofit): AccuWeatherApi {
+        return retrofit.create(AccuWeatherApi::class.java)
     }
 
     /**

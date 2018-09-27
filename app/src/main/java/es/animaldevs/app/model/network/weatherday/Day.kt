@@ -1,4 +1,4 @@
-package es.animaldevs.app.model
+package es.animaldevs.app.model.network.weatherday
 
 import com.squareup.moshi.Json
 

@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import es.animaldevs.app.injection.component.ActivityInjector
 import es.animaldevs.app.injection.component.DaggerActivityInjector
 import es.animaldevs.app.injection.module.NavigatorModule
-import es.animaldevs.app.ui.weather.WeatherListActivity
+import es.animaldevs.app.ui.weather.WeatherDayListActivity
 
 abstract class BaseActivity : AppCompatActivity() {
     private val injector: ActivityInjector = DaggerActivityInjector
@@ -21,7 +21,7 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     private fun inject() {
         when (this) {
-            is WeatherListActivity -> injector.inject(this)
+            is WeatherDayListActivity -> injector.inject(this)
         }
     }
 }

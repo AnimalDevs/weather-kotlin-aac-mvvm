@@ -2,7 +2,7 @@ package es.animaldevs.app.injection.component
 
 import dagger.Component
 import es.animaldevs.app.injection.module.NavigatorModule
-import es.animaldevs.app.ui.weather.WeatherListActivity
+import es.animaldevs.app.ui.weather.WeatherDayListActivity
 import javax.inject.Singleton
 
 /**
@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Component(modules = [(NavigatorModule::class)])
 interface ActivityInjector {
 
-    fun inject(weatherListActivity: WeatherListActivity)
+    fun inject(weatherDayListActivity: WeatherDayListActivity)
 
     @Component.Builder
     interface Builder {

@@ -13,7 +13,7 @@ object NavigatorModule {
     @Singleton
     @JvmStatic
     internal fun provideNavigator(): Navigator {
-        //return retrofit.create(CluesApi::class.java)
+        //return retrofit.create(AccuWeatherApi::class.java)
         return Navigator()
     }
 

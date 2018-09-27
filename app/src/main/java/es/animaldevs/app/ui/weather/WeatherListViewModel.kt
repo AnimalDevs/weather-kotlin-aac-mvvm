@@ -2,33 +2,24 @@ package es.animaldevs.app.ui.weather
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
-import com.squareup.moshi.Moshi
 import es.animaldevs.app.R
 import es.animaldevs.app.base.BaseViewModel
-import es.animaldevs.app.model.ModelExample
-import es.animaldevs.app.model.ModelExampleDao
+import es.animaldevs.app.model.local.weatherday.WeatherDay
+import es.animaldevs.app.model.local.weatherday.WeatherDays
+import es.animaldevs.app.model.local.weatherday.WeatherDaysDao
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
 
-class WeatherListViewModel(private val modelExampleDao: ModelExampleDao) : BaseViewModel(), WeatherListAdapter.Callbacks {
+class WeatherListViewModel(private val weatherDaysDao: WeatherDaysDao) : BaseViewModel(), WeatherDayListAdapter.Callbacks {
 
-    @Inject
-    lateinit var moshi: Moshi
-
-    val weatherListAdapter: WeatherListAdapter = WeatherListAdapter(this)
+    val weatherDayListAdapter: WeatherDayListAdapter = WeatherDayListAdapter(this)
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
-    val qrButtonVisibility: MutableLiveData<Int> = MutableLiveData()
-    val qrCameraVisibility: MutableLiveData<Int> = MutableLiveData()
-    val points: MutableLiveData<Int> = MutableLiveData()
-    val totalPoints: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
-    val alertMessage: MutableLiveData<Int> = MutableLiveData()
-    val modelExampleSelected: MutableLiveData<ModelExample> = MutableLiveData()
+    val itemSelected: MutableLiveData<WeatherDay> = MutableLiveData()
 
     val errorClickListener = View.OnClickListener { loadWeathers() }
 
@@ -44,7 +35,7 @@ class WeatherListViewModel(private val modelExampleDao: ModelExampleDao) : BaseV
     }
 
     private fun loadWeathers() {
-        subscription = Observable.fromCallable { modelExampleDao.all }
+        subscription = Observable.fromCallable { weatherDaysDao.all }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrieveWeatherListStart() }
@@ -61,11 +52,8 @@ class WeatherListViewModel(private val modelExampleDao: ModelExampleDao) : BaseV
         loadingVisibility.postValue(View.GONE)
     }
 
-    private fun onRetrieveWeatherListSuccess(modelExampleList: List<ModelExample>) {
-        weatherListAdapter.updateWeatherList(modelExampleList)
-        if (modelExampleList.isNotEmpty()) {
-
-        }
+    private fun onRetrieveWeatherListSuccess(items: WeatherDays) {
+        weatherDayListAdapter.updateWeatherList(items.dailyForecasts)
     }
 
 
@@ -73,16 +61,7 @@ class WeatherListViewModel(private val modelExampleDao: ModelExampleDao) : BaseV
         errorMessage.postValue(R.string.item_error)
     }
 
-    override fun onItemClick(view: View, item: ModelExample) {
-        modelExampleSelected.postValue(item)
-    }
-
-    fun removeAllClues() {
-        Observable.just(modelExampleDao)
-                .subscribeOn(Schedulers.io())
-                .subscribe { db ->
-                    db.removeAllModelExamples()
-                    loadWeathers()
-                }
+    override fun onItemClick(view: View, item: WeatherDay) {
+        itemSelected.postValue(item)
     }
 }

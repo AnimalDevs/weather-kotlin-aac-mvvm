@@ -1,4 +1,4 @@
-package es.animaldevs.app.model
+package es.animaldevs.app.model.network.weatherday
 
 import com.squareup.moshi.Json
 
@@ -16,12 +16,12 @@ import com.squareup.moshi.Json
 "MobileLink": "http://m.accuweather.com/en/es/madrid/308526/extended-weather-forecast/308526?lang=en-en",
 "Link": "http://www.accuweather.com/en/es/madrid/308526/daily-weather-forecast/308526?lang=en-en"
 },
-"DailyForecasts": [
+"WeatherDay": [
 {
 "Date": "2018-09-25T07:00:00+02:00",
 "EpochDate": 1537851600,
 "Temperature": {
-"Minimum": {
+"TemperatureData": {
 "Value": 64,
 "Unit": "F",
 "UnitType": 18
@@ -50,7 +50,7 @@ import com.squareup.moshi.Json
 "Date": "2018-09-26T07:00:00+02:00",
 "EpochDate": 1537938000,
 "Temperature": {
-"Minimum": {
+"TemperatureData": {
 "Value": 60,
 "Unit": "F",
 "UnitType": 18
@@ -79,7 +79,7 @@ import com.squareup.moshi.Json
 "Date": "2018-09-27T07:00:00+02:00",
 "EpochDate": 1538024400,
 "Temperature": {
-"Minimum": {
+"TemperatureData": {
 "Value": 57,
 "Unit": "F",
 "UnitType": 18
@@ -108,7 +108,7 @@ import com.squareup.moshi.Json
 "Date": "2018-09-28T07:00:00+02:00",
 "EpochDate": 1538110800,
 "Temperature": {
-"Minimum": {
+"TemperatureData": {
 "Value": 61,
 "Unit": "F",
 "UnitType": 18
@@ -137,7 +137,7 @@ import com.squareup.moshi.Json
 "Date": "2018-09-29T07:00:00+02:00",
 "EpochDate": 1538197200,
 "Temperature": {
-"Minimum": {
+"TemperatureData": {
 "Value": 57,
 "Unit": "F",
 "UnitType": 18
@@ -167,5 +167,5 @@ import com.squareup.moshi.Json
  *
  */
 
-data class WeatherResponse(@Json(name = "DailyForecasts")
+data class WeatherDayResponse(@Json(name = "WeatherDay")
                            val dailyForecasts: List<DailyForecastsItem>?)
