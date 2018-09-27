@@ -5,16 +5,16 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 
 @Dao
-interface WeatherDaysDao {
-    @get:Query("SELECT * FROM WeatherDays")
-    val all: WeatherDays
+interface WeatherDayDao {
+    @get:Query("SELECT * FROM WeatherDay")
+    val all: WeatherDay
 
     @Insert
-    fun insertAll(vararg items: WeatherDays)
+    fun insertAll(vararg items: WeatherDay)
 
     @Insert
-    fun insert(item: WeatherDays)
+    fun insert(item: WeatherDay)
 
-    @Query("DELETE FROM WeatherDays")
+    @Query("DELETE FROM WeatherDay")
     fun removeAllItems()
 }

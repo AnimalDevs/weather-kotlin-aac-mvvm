@@ -12,7 +12,7 @@ class Navigator {
         activity.startActivity(intent)
     }
 
-    /*fun navigateToDetail(activity: Activity, modelExample: ModelExample) {
+    /*fun navigateToDetail(activity: Activity, item: Item) {
         val intent = Intent(activity, WeatherDetailActivity::class.java)
         intent.putExtra(EXTRA_CLUE, modelExample)
         ActivityCompat.startActivity(activity, intent, null)

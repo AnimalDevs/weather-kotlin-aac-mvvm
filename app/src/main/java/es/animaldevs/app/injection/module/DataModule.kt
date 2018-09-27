@@ -32,9 +32,9 @@ object DataModule {
     }
 
     /**
-     * Provides the ModelExample service implementation.
+     * Provides the service implementation.
      * @param retrofit the Retrofit object used to instantiate the service
-     * @return the ModelExample service implementation.
+     * @return the service implementation.
      */
     @Provides
     @Reusable

@@ -1,5 +1,7 @@
 package es.animaldevs.app.model.local.weatherday
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import es.animaldevs.app.model.network.weatherday.DailyForecastsItem
 import es.animaldevs.app.model.network.weatherday.TemperatureData
 import java.sql.Date
@@ -7,6 +9,7 @@ import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Entity
 data class WeatherDay(
         val nameDay: String,
         val dayAndMonth: String,
@@ -14,6 +17,9 @@ data class WeatherDay(
         val temperatureMax: String,
         val icon: Int
 ) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+
     object Map {
         fun from(response: DailyForecastsItem) =
                 WeatherDay(toDayNameDate(response.epochDate),

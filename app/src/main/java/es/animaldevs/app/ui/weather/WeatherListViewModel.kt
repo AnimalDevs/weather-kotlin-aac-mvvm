@@ -2,18 +2,17 @@ package es.animaldevs.app.ui.weather
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
-import es.animaldevs.app.R
 import es.animaldevs.app.base.BaseViewModel
 import es.animaldevs.app.model.local.weatherday.WeatherDay
+import es.animaldevs.app.model.local.weatherday.WeatherDayDao
 import es.animaldevs.app.model.local.weatherday.WeatherDays
-import es.animaldevs.app.model.local.weatherday.WeatherDaysDao
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
-class WeatherListViewModel(private val weatherDaysDao: WeatherDaysDao) : BaseViewModel(), WeatherDayListAdapter.Callbacks {
+class WeatherListViewModel(private val weatherDayDao: WeatherDayDao) : BaseViewModel(), WeatherDayListAdapter.Callbacks {
 
     val weatherDayListAdapter: WeatherDayListAdapter = WeatherDayListAdapter(this)
 
@@ -35,7 +34,7 @@ class WeatherListViewModel(private val weatherDaysDao: WeatherDaysDao) : BaseVie
     }
 
     private fun loadWeathers() {
-        subscription = Observable.fromCallable { weatherDaysDao.all }
+        subscription = Observable.fromCallable { weatherDayDao.all }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrieveWeatherListStart() }
