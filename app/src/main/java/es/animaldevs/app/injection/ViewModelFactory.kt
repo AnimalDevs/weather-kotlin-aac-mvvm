@@ -12,7 +12,7 @@ class ViewModelFactory(private val activity: AppCompatActivity): ViewModelProvid
         if (modelClass.isAssignableFrom(WeatherListViewModel::class.java)) {
             val db = Room.databaseBuilder(activity.applicationContext, AppDatabase::class.java, "clues").build()
             @Suppress("UNCHECKED_CAST")
-            return WeatherListViewModel(db.modelExampleDao()) as T
+            return WeatherListViewModel(db.weatherDayDao()) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
 

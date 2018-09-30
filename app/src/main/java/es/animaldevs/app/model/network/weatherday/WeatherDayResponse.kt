@@ -1,6 +1,7 @@
 package es.animaldevs.app.model.network.weatherday
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  *
@@ -166,6 +167,6 @@ import com.squareup.moshi.Json
 }
  *
  */
-
-data class WeatherDayResponse(@Json(name = "WeatherDay")
-                           val dailyForecasts: List<DailyForecastsItem>?)
+@JsonClass(generateAdapter = true)
+data class WeatherDayResponse(@Json(name = "DailyForecasts")
+                              val dailyForecasts: List<DailyForecastsItem>?)

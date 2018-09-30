@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3bf34ea480d0dc2dd08de5af6e694c61",
+    "identityHash": "22f97330d87012c768e29bce3fc42ca5",
     "entities": [
       {
-        "tableName": "ModelExample",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `total_points` INTEGER NOT NULL, `image` TEXT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `points` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "tableName": "WeatherDay",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nameDay` TEXT NOT NULL, `dayAndMonth` TEXT NOT NULL, `temperatureMin` TEXT NOT NULL, `temperatureMax` TEXT NOT NULL, `icon` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -15,32 +15,32 @@
             "notNull": true
           },
           {
-            "fieldPath": "total_points",
-            "columnName": "total_points",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "image",
-            "columnName": "image",
+            "fieldPath": "nameDay",
+            "columnName": "nameDay",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "title",
-            "columnName": "title",
+            "fieldPath": "dayAndMonth",
+            "columnName": "dayAndMonth",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "description",
-            "columnName": "description",
+            "fieldPath": "temperatureMin",
+            "columnName": "temperatureMin",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "points",
-            "columnName": "points",
+            "fieldPath": "temperatureMax",
+            "columnName": "temperatureMax",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "icon",
+            "columnName": "icon",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -49,7 +49,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -57,7 +57,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"3bf34ea480d0dc2dd08de5af6e694c61\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"22f97330d87012c768e29bce3fc42ca5\")"
     ]
   }
 }

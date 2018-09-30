@@ -2,17 +2,24 @@ package es.animaldevs.app.ui.weather
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
+import es.animaldevs.app.BuildConfig
+import es.animaldevs.app.R
 import es.animaldevs.app.base.BaseViewModel
 import es.animaldevs.app.model.local.weatherday.WeatherDay
 import es.animaldevs.app.model.local.weatherday.WeatherDayDao
 import es.animaldevs.app.model.local.weatherday.WeatherDays
-import io.reactivex.Observable
+import es.animaldevs.app.network.AccuWeatherApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
+import javax.inject.Inject
 
 
 class WeatherListViewModel(private val weatherDayDao: WeatherDayDao) : BaseViewModel(), WeatherDayListAdapter.Callbacks {
+
+    @Inject
+    lateinit var accuWeatherApi: AccuWeatherApi
 
     val weatherDayListAdapter: WeatherDayListAdapter = WeatherDayListAdapter(this)
 
@@ -34,29 +41,41 @@ class WeatherListViewModel(private val weatherDayDao: WeatherDayDao) : BaseViewM
     }
 
     private fun loadWeathers() {
-        subscription = Observable.fromCallable { weatherDayDao.all }
+        subscription = accuWeatherApi.getWeatherDays("308526", BuildConfig.API_KEY, "es-es", "false", "true")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrieveWeatherListStart() }
                 .doOnTerminate { onRetrieveWeatherListFinish() }
-                .subscribe { result -> onRetrieveWeatherListSuccess(result) }
+                .subscribe( { result -> onRetrieveWeatherListSuccess(WeatherDays.Map.from(result))},
+                        { error -> onRetrieveWeatherListError(error)
+                })
     }
 
     private fun onRetrieveWeatherListStart() {
+        Timber.d("----------->onRetrieveWeatherListStart")
         loadingVisibility.postValue(View.VISIBLE)
         errorMessage.postValue(null)
     }
 
     private fun onRetrieveWeatherListFinish() {
+        Timber.d("----------->onRetrieveWeatherListFinish")
         loadingVisibility.postValue(View.GONE)
     }
 
     private fun onRetrieveWeatherListSuccess(items: WeatherDays) {
+        Timber.d("----------->onRetrieveWeatherListSuccess")
+
+        items.dailyForecasts?.forEach {
+            Timber.d("----------->%s", it.dayAndMonth)
+        }
+
         weatherDayListAdapter.updateWeatherList(items.dailyForecasts)
     }
 
 
-    private fun onRetrieveWeatherListError() {
+    private fun onRetrieveWeatherListError(error: Throwable) {
+        Timber.d("----------->onRetrieveWeatherListError: %s", error)
+
         errorMessage.postValue(R.string.item_error)
     }
 
