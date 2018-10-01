@@ -46,7 +46,9 @@ class WeatherListViewModel(private val weatherDayDao: WeatherDayDao) : BaseViewM
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrieveWeatherListStart() }
                 .doOnTerminate { onRetrieveWeatherListFinish() }
-                .subscribe( { result -> onRetrieveWeatherListSuccess(WeatherDays.Map.from(result))},
+                .subscribe( {
+                    result -> onRetrieveWeatherListSuccess(WeatherDays.Map.from(result))
+                },
                         { error -> onRetrieveWeatherListError(error)
                 })
     }

@@ -50,10 +50,10 @@ object DataModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit {
+    internal fun provideRetrofitInterface(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .client(okHttpClient)
                 .build()
