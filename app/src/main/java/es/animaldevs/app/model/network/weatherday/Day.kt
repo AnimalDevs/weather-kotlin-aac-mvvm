@@ -1,8 +1,4 @@
 package es.animaldevs.app.model.network.weatherday
 
-import com.squareup.moshi.Json
-
-data class Day(@Json(name = "IconPhrase")
-               val iconPhrase: String = "",
-               @Json(name = "Icon")
+data class Day(val iconPhrase: String = "",
                val icon: Int = 0)
