@@ -1,4 +1,4 @@
-package es.animaldevs.app.injection.module
+package es.animaldevs.app.injection
 
 import dagger.Module
 import dagger.Provides
@@ -13,7 +13,6 @@ object NavigatorModule {
     @Singleton
     @JvmStatic
     internal fun provideNavigator(): Navigator {
-        //return retrofit.create(AccuWeatherApi::class.java)
         return Navigator()
     }
 

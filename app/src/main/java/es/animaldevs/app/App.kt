@@ -1,17 +1,15 @@
 package es.animaldevs.app
 
-import dagger.android.DaggerApplication
-import es.animaldevs.app.injection.component.DaggerAppComponent
+import android.app.Application
+import es.animaldevs.app.injection.Injector
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
 
-class App : DaggerApplication() {
-    private val applicationInjector = DaggerAppComponent.builder()
-            .application(this)
-            .build()
-
-    override fun applicationInjector() = applicationInjector
+class App : Application() {
+    init {
+        Injector.init(this)
+    }
 
     override fun onCreate() {
         super.onCreate()

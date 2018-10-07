@@ -1,10 +1,10 @@
 package es.animaldevs.app.ui.weather
 
 import android.arch.lifecycle.MutableLiveData
-import es.animaldevs.app.base.BaseViewModel
+import android.arch.lifecycle.ViewModel
 import es.animaldevs.app.model.local.weatherday.WeatherDay
 
-class WeatherDayItemViewModel : BaseViewModel() {
+class WeatherDayItemViewModel : ViewModel() {
     val nameDay = MutableLiveData<String>()
     val dayAndMonth = MutableLiveData<String>()
     val icon = MutableLiveData<Int>()

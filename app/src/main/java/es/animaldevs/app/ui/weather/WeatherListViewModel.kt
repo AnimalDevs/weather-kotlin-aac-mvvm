@@ -1,10 +1,11 @@
 package es.animaldevs.app.ui.weather
 
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import android.view.View
 import es.animaldevs.app.BuildConfig
 import es.animaldevs.app.R
-import es.animaldevs.app.base.BaseViewModel
+import es.animaldevs.app.injection.Injector
 import es.animaldevs.app.model.local.weatherday.WeatherDay
 import es.animaldevs.app.model.local.weatherday.WeatherDayDao
 import es.animaldevs.app.model.local.weatherday.WeatherDays
@@ -16,10 +17,11 @@ import timber.log.Timber
 import javax.inject.Inject
 
 
-class WeatherListViewModel(private val weatherDayDao: WeatherDayDao) : BaseViewModel(), WeatherDayListAdapter.Callbacks {
-
-    @Inject
-    lateinit var accuWeatherApi: AccuWeatherApi
+class WeatherListViewModel
+@Inject constructor(
+        private val weatherDayDao: WeatherDayDao,
+        private val accuWeatherApi: AccuWeatherApi
+) : ViewModel(), WeatherDayListAdapter.Callbacks {
 
     val weatherDayListAdapter: WeatherDayListAdapter = WeatherDayListAdapter(this)
 
@@ -32,6 +34,7 @@ class WeatherListViewModel(private val weatherDayDao: WeatherDayDao) : BaseViewM
     private lateinit var subscription: Disposable
 
     init {
+        Injector.get().inject(this)
         loadWeathers()
     }
 
@@ -46,11 +49,12 @@ class WeatherListViewModel(private val weatherDayDao: WeatherDayDao) : BaseViewM
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrieveWeatherListStart() }
                 .doOnTerminate { onRetrieveWeatherListFinish() }
-                .subscribe( {
-                    result -> onRetrieveWeatherListSuccess(WeatherDays.Map.from(result))
+                .subscribe({ result ->
+                    onRetrieveWeatherListSuccess(WeatherDays.Map.from(result))
                 },
-                        { error -> onRetrieveWeatherListError(error)
-                })
+                        { error ->
+                            onRetrieveWeatherListError(error)
+                        })
     }
 
     private fun onRetrieveWeatherListStart() {

@@ -1,28 +1,36 @@
 package es.animaldevs.app.ui.weather
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import es.animaldevs.app.R
-import es.animaldevs.app.base.BaseActivity
 import es.animaldevs.app.databinding.ActivityWeatherListBinding
-import es.animaldevs.app.injection.ViewModelFactory
+import es.animaldevs.app.injection.Injector
 import es.animaldevs.app.navigator.Navigator
 import timber.log.Timber
 import javax.inject.Inject
 
 
-class WeatherDayListActivity : BaseActivity() {
+class WeatherDayListActivity : AppCompatActivity() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var binding: ActivityWeatherListBinding
-    private lateinit var viewModel: WeatherListViewModel
     private var errorSnackbar: Snackbar? = null
+    private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(WeatherListViewModel::class.java) }
 
     @Inject
     lateinit var navigator: Navigator
+
+    init {
+        Injector.get().inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +46,6 @@ class WeatherDayListActivity : BaseActivity() {
 
         binding.clueList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(WeatherListViewModel::class.java)
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
         })

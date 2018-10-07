@@ -2,19 +2,26 @@ package es.animaldevs.app.injection
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import android.arch.persistence.room.Room
-import android.support.v7.app.AppCompatActivity
-import es.animaldevs.app.model.database.AppDatabase
-import es.animaldevs.app.ui.weather.WeatherListViewModel
+import javax.inject.Inject
+import javax.inject.Provider
+import javax.inject.Singleton
 
-class ViewModelFactory(private val activity: AppCompatActivity): ViewModelProvider.Factory{
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(WeatherListViewModel::class.java)) {
-            val db = Room.databaseBuilder(activity.applicationContext, AppDatabase::class.java, "clues").build()
-            @Suppress("UNCHECKED_CAST")
-            return WeatherListViewModel(db.weatherDayDao()) as T
+@Singleton
+class ViewModelFactory
+@Inject constructor(private val providers: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        var provider = providers[modelClass]
+        if (provider == null) {
+            provider = providers.filter { (key, _) -> modelClass.isAssignableFrom(key) }
+                    .map { it.value }
+                    .firstOrNull()
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
-
+        try {
+            @Suppress("UNCHECKED_CAST")
+            return provider?.get() as? T ?: error("Unknown model class $modelClass:  Make $modelClass has a Provider in your Dagger ViewModel module")
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
     }
 }
