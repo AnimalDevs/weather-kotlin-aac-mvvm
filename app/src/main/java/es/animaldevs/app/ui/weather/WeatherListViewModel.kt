@@ -72,7 +72,7 @@ class WeatherListViewModel
         Timber.d("----------->onRetrieveWeatherListSuccess")
 
         items.dailyForecasts?.forEach {
-            Timber.d("----------->%s", it.dayAndMonth)
+            Timber.d("----------->${it.dayAndMonth}")
         }
 
         weatherDayListAdapter.updateWeatherList(items.dailyForecasts)
@@ -80,7 +80,7 @@ class WeatherListViewModel
 
 
     private fun onRetrieveWeatherListError(error: Throwable) {
-        Timber.d("----------->onRetrieveWeatherListError: %s", error)
+        Timber.d("----------->onRetrieveWeatherListError: $error")
 
         errorMessage.postValue(R.string.item_error)
     }
