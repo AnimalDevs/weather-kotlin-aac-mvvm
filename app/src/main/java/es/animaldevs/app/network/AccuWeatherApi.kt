@@ -1,6 +1,6 @@
 package es.animaldevs.app.network
 
-import es.animaldevs.app.model.network.weatherday.WeatherDayResponse
+import es.animaldevs.app.model.network.weatherday.WeatherResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,6 +17,6 @@ interface AccuWeatherApi {
             @Query("language") language: String,
             @Query("details") details: String,
             @Query("metric") metric: String
-    ): Observable<WeatherDayResponse>
+    ): Observable<WeatherResponse>
 
 }

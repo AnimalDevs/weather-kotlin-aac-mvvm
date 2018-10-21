@@ -11,39 +11,40 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
+        android:layout_height="100dp"
+        android:background="@android:color/darker_gray"
         android:orientation="vertical">
+        <!--android:background="?android:attr/selectableItemBackground"-->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:mutableInt="@{viewModel.icon}" />
+            app:mutableInt="@{viewModel.getIcon()}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:mutableText="@{viewModel.nameDay}" />
+            app:mutableText="@{viewModel.getNameDay()}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:mutableText="@{viewModel.dayAndMonth}" />
+            app:mutableText="@{viewModel.getDayAndMonth()}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:mutableText="@{viewModel.temperatureMin}" />
+            app:mutableText="@{viewModel.getTemperatureMin()}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:mutableText="@{viewModel.temperatureMax}" />
+            app:mutableText="@{viewModel.getTemperatureMax()}" />
 
 
         <LinearLayout

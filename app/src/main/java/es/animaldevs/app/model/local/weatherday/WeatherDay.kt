@@ -2,7 +2,7 @@ package es.animaldevs.app.model.local.weatherday
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import es.animaldevs.app.model.network.weatherday.DailyForecastsItem
+import es.animaldevs.app.model.network.weatherday.DailyForecast
 import es.animaldevs.app.model.network.weatherday.TemperatureData
 import java.sql.Date
 import java.sql.Timestamp
@@ -21,7 +21,7 @@ data class WeatherDay(
     var id: Int = 0
 
     object Map {
-        fun from(response: DailyForecastsItem) =
+        fun from(response: DailyForecast) =
                 WeatherDay(toDayNameDate(response.epochDate),
                         toDayAndMonth(response.epochDate),
                         toSimpleTemperature(response.temperature.minimum),
@@ -30,7 +30,8 @@ data class WeatherDay(
 
         //TODO Sacar esto a clase de utils
         private fun toSimpleTemperature(temp: TemperatureData): String {
-            return String.format("%d %s", temp.value, temp.unit)
+            //return String.format("%d %s", temp.value, temp.unit)
+            return String.format("%d %s", 1, temp.unit)
         }
 
         fun toDayNameDate(epoch: Long): String {

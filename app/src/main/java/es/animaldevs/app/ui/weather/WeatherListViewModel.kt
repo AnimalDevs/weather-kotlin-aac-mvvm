@@ -50,6 +50,9 @@ class WeatherListViewModel
                 .doOnSubscribe { onRetrieveWeatherListStart() }
                 .doOnTerminate { onRetrieveWeatherListFinish() }
                 .subscribe({ result ->
+
+                    Timber.d("---------> $result")
+
                     onRetrieveWeatherListSuccess(WeatherDays.Map.from(result))
                 },
                         { error ->
@@ -75,7 +78,7 @@ class WeatherListViewModel
             Timber.d("----------->${it.dayAndMonth}")
         }
 
-        weatherDayListAdapter.updateWeatherList(items.dailyForecasts)
+        items.dailyForecasts?.let { weatherDayListAdapter.updateWeatherList(it) }
     }
 
 

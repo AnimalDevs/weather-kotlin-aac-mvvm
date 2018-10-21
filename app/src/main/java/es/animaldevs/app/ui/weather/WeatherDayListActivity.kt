@@ -44,7 +44,7 @@ class WeatherDayListActivity : AppCompatActivity() {
         actionBar!!.title = "Weather"
         actionBar.elevation = 4.0F
 
-        binding.clueList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()

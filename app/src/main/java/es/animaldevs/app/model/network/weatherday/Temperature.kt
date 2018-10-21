@@ -1,4 +1,10 @@
 package es.animaldevs.app.model.network.weatherday
 
-data class Temperature(val minimum: TemperatureData,
-                       val maximum: TemperatureData)
+import com.google.gson.annotations.SerializedName
+
+data class Temperature(
+        @SerializedName("Minimum")
+        val minimum: TemperatureData = TemperatureData(),
+        @SerializedName("Maximum")
+        val maximum: TemperatureData = TemperatureData()
+)
